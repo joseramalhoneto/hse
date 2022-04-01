@@ -1,0 +1,11 @@
+<app-nav-bar></app-nav-bar>
+<ag-grid-angular
+    style="width: 100%;"
+    class="ag-theme-alpine"
+    [rowData]="productCategories"
+    [columnDefs]="columnDefs"
+    [pagination]="true"
+    (gridReady)="onGridReady($event)"
+    rowSelection="single"
+    [defaultColDef]="defaultColDef">
+</ag-grid-angular>
