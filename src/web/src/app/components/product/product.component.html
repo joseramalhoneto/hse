@@ -1,8 +1,8 @@
 <app-nav-bar></app-nav-bar>
 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
   <div class="btn-group mr-2" role="group" aria-label="First group">
-    <button type="button" class="btn btn-link"  data-toggle="modal" data-target="#addCustomerModal" (click)="setAction('add')">Add</button>
-    <button type="button" class="btn btn-link"  data-toggle="modal" data-target="#addCustomerModal"(click)="setAction('update');setProduct()">Update</button>
+    <button type="button" class="btn btn-link"  data-toggle="modal" data-target="#addProductModal" (click)="setAction('add')">Add</button>
+    <button type="button" class="btn btn-link"  data-toggle="modal" data-target="#addProductModal"(click)="setAction('update');setProduct()">Update</button>
     <button type="button" class="btn btn-link" (click)="deleteProduct()">Delete</button>
   </div>
 </div>
@@ -18,11 +18,11 @@
     [defaultColDef]="defaultColDef">
 </ag-grid-angular>
 
-<div class="modal fade" id="addCustomerModal" tabindex="-1" role="dialog" aria-labelledby="addCustomerModalLabel" aria-hidden="true">
+<div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
        <div class="modal-header">
-          <h5 class="modal-title" id="addCustomerModalLabel">Add Contract</h5>
+          <h5 class="modal-title" id="addProductModalLabel">Add Contract</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
           </button>
