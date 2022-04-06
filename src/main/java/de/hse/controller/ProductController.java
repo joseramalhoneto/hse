@@ -52,10 +52,4 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/find/allProductsByCategory")
-    public ResponseEntity<List<ProductCategory>> findAllProductByCategory(){
-        List<ProductCategory> allProducts = productService.getProductByCategory();
-        return new ResponseEntity<>(allProducts, HttpStatus.OK);
-    }
-
 }

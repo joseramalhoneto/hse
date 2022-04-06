@@ -37,4 +37,9 @@ export class ProductService {
     return this.http.get(`${this.apiServerUrl}/product/find/allProductsByCategory`);
   }
 
+  public getExchangedValue(): Observable<any>{
+    return this.http.get("http://data.fixer.io/api/latest?access_key=b3ce6e84467bcae177691e0b3ed85390");
+  }
+
+
 }

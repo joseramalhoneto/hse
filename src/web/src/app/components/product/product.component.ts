@@ -1,6 +1,10 @@
+import { Currency } from './../../model/currency';
 import { HttpClient } from '@angular/common/http';
 import { Grid, ColDef, FirstDataRenderedEvent, GridReadyEvent, IDetailCellRendererParams, GridApi, ColumnApi } from 'ag-grid-community';
 import { Product } from '../../model/product';
+import { ProductCategory } from './../../model/product.category';
+import { ProductCategoryService } from './../../service/product.category.service';
+import { ProductCategoryComponent } from './../product-category/product-category.component';
 import { ProductService } from '../../service/product.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -14,11 +18,14 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class ProductComponent implements OnInit {
 
   public products: Product[] = [];
+  public currency = new Currency;
   public columnDefs: ColDef[] = [];
   private api: GridApi = new GridApi;
   private columnApi: ColumnApi = new ColumnApi;
   private action?: string;
   public product: Product = new Product;
+  public showCurrencyModal: boolean = false;
+  public productCategories: ProductCategory[] = [];
 
   public defaultColDef: ColDef = {
     editable: false,
@@ -29,12 +36,14 @@ export class ProductComponent implements OnInit {
     resizable: true,
   };
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService,
+    private productCategoryService: ProductCategoryService) {
     this.columnDefs = this.createColumnDefs();
   }
 
   ngOnInit(): void {
     this.findAllProducts();
+    this.findAllProductCategories();
   }
 
   onGridReady(params: any): void {
@@ -55,17 +64,34 @@ export class ProductComponent implements OnInit {
     },{
       headerName: 'Description',
       field: 'description'
-  }, {
+    },{
         headerName: 'Price',
         field: 'price',
+        colId: 'price',
         valueGetter: function(params: any){
           return params.data.price + " " + params.data.base
-        },
-        cellRenderer: function(params: any) {
-          return '<a href="test/'+params.value.toLowerCase()+'" target="_blank">'+ params.value +'</a>'
-      }
+        }
     }
     ]
+  }
+
+
+  public onCellClicked(event: any){
+    if (event.column.colId == "price"){
+
+      console.log(this.api.getSelectedRows()[0].base);
+
+      this.productService.getExchangedValue().subscribe(
+        (response: Currency) => {
+          this.currency = response;
+        }
+      );
+      this.setShowCurrencyModal();
+    }
+  }
+
+  public setShowCurrencyModal(){
+    this.showCurrencyModal = !this.showCurrencyModal;
   }
 
   public findAllProducts():void{
@@ -144,6 +170,24 @@ export class ProductComponent implements OnInit {
       selectedRow.price,
       selectedRow.base
     )
+  }
+
+  public findAllProductCategories(): void{
+    this.productCategoryService.findAllProductsByCategories().subscribe(
+      (response: ProductCategory[]) => {
+        this.productCategories = response;
+
+    this.getCategoriesByProductId(1);
+      }
+    );
+  }
+
+  public getCategoriesByProductId(productId: number){
+    var itens = this.productCategories.filter(item => item.product?.productId == productId);
+console.log(itens);
+
+
+
   }
 
 }

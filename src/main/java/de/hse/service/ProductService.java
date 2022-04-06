@@ -14,12 +14,10 @@ import java.util.List;
 public class ProductService {
 
     private final ProductRepository productRepository;
-    private final ProductCategoryRepository productCategoryRepository;
 
     @Autowired
-    public ProductService(ProductRepository productRepository, ProductCategoryRepository productCategoryRepository) {
+    public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
-        this.productCategoryRepository = productCategoryRepository;
     }
 
     public Product saveProduct(Product product){
@@ -54,7 +52,4 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    public List<ProductCategory> getProductByCategory() {
-        return productCategoryRepository.findAll();
-    }
 }

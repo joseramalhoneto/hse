@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AgGridModule } from 'ag-grid-angular';
 import { AppRoutingModule } from './app-routing.module';
@@ -12,7 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { FormsModule } from '@angular/forms';
 import { ProductCategoryComponent } from './components/product-category/product-category.component';
-
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,8 +26,10 @@ import { ProductCategoryComponent } from './components/product-category/product-
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    AngularMultiSelectModule,
     AgGridModule.withComponents([])
   ],
+  schemas:[NO_ERRORS_SCHEMA],
   providers: [ProductService,
     CategoryService,
     ProductCategoryService
