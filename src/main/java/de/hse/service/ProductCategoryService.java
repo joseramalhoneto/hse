@@ -25,11 +25,9 @@ public class ProductCategoryService {
         List<ProductCategory> allProductCategory = productCategoryRepository.findAll();
         for (ProductCategory item: allProductCategory) {
             String productById = productCategoryRepository.findProductById(item.getProductId());
-            System.out.println(productById);
             item.setProductName(productById);
 
             String categoryById = productCategoryRepository.findCategoryById(item.getCategoryId());
-            System.out.println(categoryById);
             item.setCategoryName(categoryById);
         }
         return allProductCategory;
