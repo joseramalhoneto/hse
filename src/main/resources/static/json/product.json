@@ -1,14 +1,14 @@
 [{
 	"productId": 1,
-	"name": "name_test1",
-	"description": "description_test1",
+	"name": "Laptop",
+	"description": "Dell VCR893",
 	"price": 314.0,
 	"base": "EUR"
 },
 {
 	"productId": 2,
-	"name": "name_test2",
-	"description": "description_test2",
+	"name": "Mobile Phone",
+	"description": "Samsung",
 	"price": 264.1,
 	"base": "GBP"
 }]

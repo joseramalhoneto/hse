@@ -60,13 +60,13 @@ export class ProductCategoryComponent implements OnInit {
        field: "productCategoryId"
     },{
         headerName: 'Product',
-        //field: 'product.name'
-        field: 'productId'
+        field: 'productName'
+        //field: 'productId'
 
     }, {
         headerName: 'Category',
-        //field: 'category.name'
-        field: 'categoryId'
+        field: 'categoryName'
+        //field: 'categoryId'
     }]
   }
 
@@ -108,6 +108,7 @@ export class ProductCategoryComponent implements OnInit {
     this.productCategoryService.findAllProductsByCategories().subscribe(
       (response: ProductCategory[]) => {
         this.productCategories = response;
+        console.log(this.productCategories);
       }
     );
   }

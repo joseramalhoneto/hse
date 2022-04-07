@@ -29,8 +29,8 @@ public class ProductCategoryController {
     }
 
     @GetMapping("/find/all")
-    public ResponseEntity<List<ProductCategory>> findAllProductCategory(){
-        List<ProductCategory> allProducts = productCategoryService.findAllProductCategory();
+    public ResponseEntity<List<ProductCategory>> findProductByCategory(){
+        List<ProductCategory> allProducts = productCategoryService.findProductByCategory();
         return new ResponseEntity<>(allProducts, HttpStatus.OK);
     }
 

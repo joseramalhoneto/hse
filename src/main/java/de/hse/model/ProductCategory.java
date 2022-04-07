@@ -25,6 +25,14 @@ public class ProductCategory {
     @Column(name = "category_id")
     private long categoryId;
 
+    @Transient
+    @Column(name = "product_name")
+    private String productName;
+
+    @Transient
+    @Column(name = "category_name")
+    private String categoryName;
+
 //    @ManyToOne
 //    private Product product;
 //
