@@ -3,8 +3,6 @@ package de.hse.service;
 import de.hse.exception.ProductException;
 import de.hse.exception.ResourceNotFoundException;
 import de.hse.model.Product;
-import de.hse.model.ProductCategory;
-import de.hse.repository.ProductCategoryRepository;
 import de.hse.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

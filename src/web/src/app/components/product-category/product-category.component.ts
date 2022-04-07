@@ -61,12 +61,10 @@ export class ProductCategoryComponent implements OnInit {
     },{
         headerName: 'Product',
         field: 'productName'
-        //field: 'productId'
 
     }, {
         headerName: 'Category',
         field: 'categoryName'
-        //field: 'categoryId'
     }]
   }
 
@@ -87,12 +85,9 @@ export class ProductCategoryComponent implements OnInit {
   }
 
   public saveProductCategory(addForm: NgForm): void {
-
-    console.log(addForm.value.productCategoryId);
     this.productCategory.productCategoryId = addForm.value.productCategoryId;
     this.productCategory.productId = addForm.value.productId;
     this.productCategory.categoryId = addForm.value.categoryId;
-    console.log(addForm.value);
     this.productCategoryService.saveProductCategory(this.productCategory).subscribe(
       () => {
         this.findAllProductCategories();
@@ -108,7 +103,6 @@ export class ProductCategoryComponent implements OnInit {
     this.productCategoryService.findAllProductsByCategories().subscribe(
       (response: ProductCategory[]) => {
         this.productCategories = response;
-        console.log(this.productCategories);
       }
     );
   }
@@ -116,7 +110,7 @@ export class ProductCategoryComponent implements OnInit {
   public deleteProductCategory(){
     var selectedRows = this.api.getSelectedRows();
     if (selectedRows.length == 0) {
-      alert("Please select a item");
+      alert("Please select an item");
       return;
     }
     if (confirm("Are you sure you want to delete?")) {
