@@ -5,6 +5,10 @@ import { ProductCategory } from './../../model/product.category';
 import { ProductCategoryService } from './../../service/product.category.service';
 import { NgForm } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Product } from '../../model/product';
+import { ProductService } from '../../service/product.service';
+import { Category } from './../../model/category';
+import { CategoryService } from './../../service/category.service';
 
 @Component({
   selector: 'app-product-category',
@@ -16,8 +20,10 @@ export class ProductCategoryComponent implements OnInit {
   public columnDefs: ColDef[] = [];
   private api: GridApi = new GridApi;
   private columnApi: ColumnApi = new ColumnApi;
-  public productCategory!: ProductCategory;
+  public productCategory: ProductCategory = new ProductCategory;
   public productCategories: ProductCategory[] = [];
+  public products: Product[] = [];
+  public categories: Category[] = [];
 
   public defaultColDef: ColDef = {
     editable: false,
@@ -28,12 +34,16 @@ export class ProductCategoryComponent implements OnInit {
     resizable: true,
   };
 
-  constructor(private productCategoryService: ProductCategoryService) {
+  constructor(private productCategoryService: ProductCategoryService,
+    private productService: ProductService,
+    private categoryService: CategoryService) {
     this.columnDefs = this.createColumnDefs();
   }
 
   ngOnInit(): void {
     this.findAllProductCategories();
+    this.findAllProducts();
+    this.findAllCategories();
   }
 
   onGridReady(params: any): void {
@@ -50,18 +60,39 @@ export class ProductCategoryComponent implements OnInit {
        field: "productCategoryId"
     },{
         headerName: 'Product',
-        field: 'product.name'
+        //field: 'product.name'
+        field: 'productId'
+
     }, {
         headerName: 'Category',
-        field: 'category.name'
+        //field: 'category.name'
+        field: 'categoryId'
     }]
   }
 
-  public saveProductCategory(addForm: NgForm): void {
-    this.productCategory.productCategoryId = addForm.value.productCategoryId;
-    this.productCategory.product.productId = addForm.value.productId;
-    this.productCategory.category.categoryId = addForm.value.categoryId;
+  public findAllProducts():void{
+    this.productService.findAllProducts().subscribe(
+      (response: Product[]) => {
+        this.products = response;
+      }
+    );
+  }
 
+  public findAllCategories():void{
+    this.categoryService.findAllCategories().subscribe(
+      (response: Category[]) => {
+        this.categories = response;
+      }
+    );
+  }
+
+  public saveProductCategory(addForm: NgForm): void {
+
+    console.log(addForm.value.productCategoryId);
+    this.productCategory.productCategoryId = addForm.value.productCategoryId;
+    this.productCategory.productId = addForm.value.productId;
+    this.productCategory.categoryId = addForm.value.categoryId;
+    console.log(addForm.value);
     this.productCategoryService.saveProductCategory(this.productCategory).subscribe(
       () => {
         this.findAllProductCategories();
@@ -88,7 +119,7 @@ export class ProductCategoryComponent implements OnInit {
       return;
     }
     if (confirm("Are you sure you want to delete?")) {
-      this.productCategoryService.deleteProductCategoryById(selectedRows[0].productId).subscribe(data => {
+      this.productCategoryService.deleteProductCategoryById(selectedRows[0].productCategoryId).subscribe(data => {
         this.findAllProductCategories();
         this.api.refreshCells();
       });

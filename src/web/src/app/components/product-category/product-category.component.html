@@ -7,7 +7,6 @@
   </div>
 </div>
 
-
 <ag-grid-angular
     style="width: 100%;"
     class="ag-theme-alpine"
@@ -19,25 +18,32 @@
     [defaultColDef]="defaultColDef">
 </ag-grid-angular>
 
-
 <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
        <div class="modal-header">
-          <h5 class="modal-title" id="addProductModalLabel">Add Contract</h5>
+          <h5 class="modal-title" id="addProductModalLabel">Add Product and Category</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
           </button>
        </div>
        <div class="modal-body">
           <form #addForm="ngForm" (ngSubmit)="saveProductCategory(addForm)">
-          <input type="hidden" name="productCategoryId" [(ngModel)]="productCategory.productCategoryId" />
+          <input type="hidden" name="productCategoryId" id="productCategoryId" [(ngModel)]="productCategory.productCategoryId" />
+
           <div class="form-group">
             <label for="customerId">Product</label>
-            <input type="text" name="productId"   />
+            <select class="form-control" name="productId" id="productId" required [(ngModel)]="productCategory.productId">
+              <option selected></option>
+              <option *ngFor="let item of this.products" [ngValue]="item.productId">{{item.name}}</option>
+            </select>
           </div>
           <div class="form-group">
             <label for="text">Category</label>
+            <select class="form-control" name="categoryId" id="categoryId" required [(ngModel)]="productCategory.categoryId">
+              <option selected></option>
+              <option *ngFor="let item of this.categories" [ngValue]="item.categoryId">{{item.name}}</option>
+            </select>
           </div>
           <div class="modal-footer">
              <button type="button" id="add-customer-form" class="btn btn-secondary" data-dismiss="modal">Close</button>

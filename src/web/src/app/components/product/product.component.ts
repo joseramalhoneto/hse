@@ -78,9 +78,6 @@ export class ProductComponent implements OnInit {
 
   public onCellClicked(event: any){
     if (event.column.colId == "price"){
-
-      console.log(this.api.getSelectedRows()[0].base);
-
       this.productService.getExchangedValue().subscribe(
         (response: Currency) => {
           this.currency = response;

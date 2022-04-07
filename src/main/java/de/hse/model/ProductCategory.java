@@ -19,9 +19,15 @@ public class ProductCategory {
     @Column(name = "product_category_id")
     private long productCategoryId;
 
-    @ManyToOne
-    private Product product;
+    @Column(name = "product_id")
+    private long productId;
 
-    @ManyToOne
-    private Category category;
+    @Column(name = "category_id")
+    private long categoryId;
+
+//    @ManyToOne
+//    private Product product;
+//
+//    @ManyToOne
+//    private Category category;
 }

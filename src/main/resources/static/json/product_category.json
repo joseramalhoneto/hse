@@ -1,43 +1,16 @@
 [{
 	"productCategoryId": 1,
-	"product": {
-		"productId": 1,
-		"name": "name_test1",
-		"description": "description_test1",
-		"price": 314.0,
-		"base": "EUR"
-	},
-	"category": {
-		"categoryId": 1,
-		"name": "Electronic"
-	}
+	"productId": 1,
+	"categoryId": 1
 },
 {
 	"productCategoryId": 2,
-	"product": {
-		"productId": 1,
-		"name": "name_test1",
-		"description": "description_test1",
-		"price": 314.0,
-		"base": "EUR"
-	},
-	"category": {
-		"categoryId": 2,
-		"name": "Technology"
-	}
+	"productId": 1,
+	"categoryId": 2
 },
 {
 	"productCategoryId": 3,
-	"product": {
-		"productId": 2,
-		"name": "name_test2",
-		"description": "description_test2",
-		"price": 264.1,
-		"base": "GBR"
-	},
-	"category": {
-		"categoryId": 1,
-		"name": "Electronic"
-	}
+	"productId": 2,
+	"categoryId": 1
 }
 ]
