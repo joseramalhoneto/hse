@@ -38,8 +38,14 @@ public class ProductService {
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + id));
     }
 
-    public Product updateProduct(Product Product){
-        return productRepository.save(Product);
+    public Product updateProduct(Product product){
+        Product productByName = productRepository.findProductByName(product.getName());
+
+        if(productByName == null){
+            return productRepository.save(product);
+        }else{
+            throw new ProductException("The product already exists. Try another name.");
+        }
     }
 
     public void deleteProductById(Long id){
